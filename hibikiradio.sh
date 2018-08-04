@@ -127,7 +127,6 @@ function info {
       echo $(accessIdOf "$url")
     })"
   local apiBaseUrl="$(fetchApiBase "$accessId")"
-  echo "access-id: $accessId" >&2
 
   fetchProgramDetail "$apiBaseUrl" "accessId"
 }
