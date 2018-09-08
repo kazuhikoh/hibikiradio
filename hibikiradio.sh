@@ -7,13 +7,13 @@ function requirements {
   local ng=0
 
   for dep in $deps; do
-    [ type $dep ] || {
-      echo "ERRPR: $dep not be installed."
+    type $dep >/dev/null 2>&1 || {
+      echo "ERROR: $dep not be installed." >&2
       ng=1
     }
   done
 
-  [[ $ng ]] && exit 1
+  return $ng
 }
 
 function usage {
@@ -133,6 +133,8 @@ function info {
 
 subcommand="$1"
 shift
+
+requirements || exit 1
 
 case "$subcommand" in
   download)
