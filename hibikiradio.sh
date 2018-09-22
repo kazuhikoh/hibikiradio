@@ -104,8 +104,11 @@ function download {
     })"
   local apiBaseUrl="$(fetchApiBase "$accessId")"
 
-  echo ""
-  echo -n "downloading... "
+  {
+    echo ""
+    echo "downloading... "
+  } >&2
+
   fetchProgramDetail "$apiBaseUrl" "accessId" \
     | {
       read detail
@@ -125,7 +128,7 @@ function download {
       fi
     }
 
-  echo "done!"
+  echo "done!" >&2
 }
 
 # info <url>
