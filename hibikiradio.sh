@@ -93,7 +93,8 @@ function fetchProgramDetail {
 # download <url> <filepath>
 function download {
   local urlOrId="$1"
-  local filepath="$2"
+  local filepath="${2%.mp4}.mp4"
+  local touch="${3:-false}"
 
   local accessId="$(
     isAccessId "$urlOrId" && {
@@ -106,12 +107,23 @@ function download {
   echo ""
   echo -n "downloading... "
   fetchProgramDetail "$apiBaseUrl" "accessId" \
-    | jq .episode.video.id \
-    | sed -E 's/\r$//' \
-    | xargs -I{} curl 'https://vcms-api.hibiki-radio.jp/api/v1/videos/play_check?video_id={}' \
+    | {
+      read detail
+
+      echo "$detail" \
+        | jq .episode.video.id \
+        | sed -E 's/\r$//' \
+        | xargs -I{} curl 'https://vcms-api.hibiki-radio.jp/api/v1/videos/play_check?video_id={}' \
                       -H 'X-Requested-With: XMLHttpRequest' \
-    | jq .playlist_url \
-    | xargs -I{} ffmpeg -i {} -c:v copy -c:a copy -bsf:a aac_adtstoasc ${filepath%.mp4}.mp4
+        | jq .playlist_url \
+        | xargs -I{} ffmpeg -i {} -c:v copy -c:a copy -bsf:a aac_adtstoasc "$filepath"
+      
+      if $touch ; then
+        echo "$detail" \
+          | jq -r .episode.updated_at \
+          | xargs -I{} touch -d {} "$filepath"
+      fi
+    }
 
   echo "done!"
 }
@@ -136,13 +148,24 @@ shift
 
 requirements || exit 1
 
+while getopts t opts
+do
+  case $opts in
+    t)
+      TOUCH=true
+      ;;
+  esac
+done
+shift $(($OPTIND - 1))
+
 case "$subcommand" in
   download)
     [ "$1" = "" ] || [ "$2" = "" ] && {
       usage
       exit 1
     }
-    download "$1" "$2"
+
+    download "$1" "$2" "$TOUCH"
     ;;
   info)
     info "$1"

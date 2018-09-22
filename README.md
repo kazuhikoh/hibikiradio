@@ -1,5 +1,7 @@
 # hibikiradio
 HiBiKi Radio Station CLI
+- `hibikiradio info [id|url]`
+- `hibikiradio download [-t] <id|url>`
 
 # Requirements
 
@@ -18,5 +20,10 @@ HiBiKi Radio Station CLI
 - If `id` is not specified, all programs infomations fetched.
 
 ## Download Video
-`./hibikiradio.sh download <id|url> <filepath>` downloads video.
+
+`./hibikiradio.sh download [-t] <id|url> <filepath>` downloads video.
 - Video will be saved in `<filepath>.mp4`
+
+|option|desc|
+|:-----|:---|
+|`-t`  |change the modified date (touch)|
