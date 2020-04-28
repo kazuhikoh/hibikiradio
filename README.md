@@ -11,12 +11,12 @@ HiBiKi Radio Station CLI
 
 ## Program Detail
 
-`./hibikiradio.sh info <id>` fetchs program infomation.
+`hibikiradio info <id>` fetchs program infomation.
 - `id`: https://hibiki-radio.jp/description/sora/detail --> sora
 
 ## Download Video
 
-`./hibikiradio.sh download [-n] <id> <filepath>` downloads video.
+`hibikiradio download [-n] <id> <filepath>` downloads video.
 - Video will be saved in `<filepath>.mp4`
 - `filepath` can contains variables:
     ```
