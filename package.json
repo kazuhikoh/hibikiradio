@@ -1,0 +1,32 @@
+{
+  "name": "hibikiradio",
+  "version": "1.0.0",
+  "description": "hibiki-radio CLI",
+  "author": "kazuhikoh",
+  "license": "MIT",
+  "preferGlobal": true,
+  "bin": {
+    "hibikiradio": "hibikiradio.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kazuhikoh/hibikiradio.git"
+  },
+  "bugs": {
+    "url": "https://github.com/kazuhikoh/hibikiradio/issues"
+  },
+  "homepage": "https://github.com/kazuhikoh/hibikiradio#readme",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "commander": "^5.0.0",
+    "jsdom": "^16.2.2",
+    "ora": "^4.0.4",
+    "rxjs": "^6.5.5",
+    "rxjs-compat": "^6.5.5",
+    "rxjs-es": "^5.0.0-beta.12"
+  },
+  "devDependencies": {}
+}
