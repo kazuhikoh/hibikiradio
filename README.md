@@ -1,29 +1,29 @@
 # hibikiradio
 HiBiKi Radio Station CLI
-- `hibikiradio info [id|url]`
-- `hibikiradio download [-t] <id|url>`
+- `hibikiradio info <id>`
+- `hibikiradio download [-n] <id>`
 
 # Requirements
 
-- grep
-- curl
 - ffmpeg
-- jq
 
 # Features
 
 ## Program Detail
 
-`./hibikiradio.sh info [id|url]` fetchs program infomation.
-- `url`: https://hibiki-radio.jp/description/sora/detail
+`./hibikiradio.sh info <id>` fetchs program infomation.
 - `id`: https://hibiki-radio.jp/description/sora/detail --> sora
-- If `id` is not specified, all programs infomations fetched.
 
 ## Download Video
 
-`./hibikiradio.sh download [-t] <id|url> <filepath>` downloads video.
+`./hibikiradio.sh download [-n] <id> <filepath>` downloads video.
 - Video will be saved in `<filepath>.mp4`
-
-|option|desc|
+- `filepath` can contains variables:
+    ```
+    hibikiradio download -n sora 'marunare.${program.episode_updated_at.slice(0,10).replace(/\//g,"")}.${program.latest_episode_name.slice(1,-1)}.mp4'
+    ```
+    
+|option||
 |:-----|:---|
-|`-t`  |change the modified date (touch)|
+|`-n`  |No action. Show filename and exit.|
+
