@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/kazuhikoh/hibikiradio#readme",
   "dependencies": {
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "commander": "^5.0.0",
     "jsdom": "^16.2.2",
     "ora": "^4.0.4",
